@@ -24,11 +24,13 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 ########################### CLASSES
-class Upload(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50))
-    picture = db.Column(db.String(50))
-    description = db.Column(db.String(1000))
+    name = db.Column(db.String(50))
+    email = db.Column(db.String(50))
+    password = db.Column(db.String(1000))
+    quesiton = db.Column(db.String(1000))
+    answer = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime, default=datetime.now)
 
 ########################### LOGIN MANAGER
@@ -45,6 +47,19 @@ def load_user(email):
 ########################### ACCOUNT
 @app.route('/signup', methods=["POST", "GET"])
 def signup():
+    if request.method == "POST":
+        req = request.form
+        name = req["name"]
+        email = req.get("email")
+        password = request.form["password"]
+        question = request.form["question"]
+        answer = request.form["ansqer"]
+        salt = bcrypt.gensalt()
+        password = bcrypt.hashpw(form.password.data.encode(), salt)
+        user = User(name=name, email=email, description=description)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(request.url)
     return render_template("account/signup.html")
 
 @app.route('/login', methods=["POST", "GET"])
