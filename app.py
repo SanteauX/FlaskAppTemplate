@@ -42,11 +42,19 @@ def load_user(email):
     else:
         return False
 
-########################### ROUTES
+########################### ACCOUNT
+@app.route('/signup', methods=["POST", "GET"])
+def signup():
+    return render_template("account/signup.html")
 
+@app.route('/login', methods=["POST", "GET"])
+def login():
+    return render_template("account/login.html")
+
+########################### ROUTES
 @app.route('/')
 def default():
-    return render_template("home.html")
+    return render_template("others/home.html")
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
@@ -76,12 +84,12 @@ def upload():
             db.session.add(project)
             db.session.commit()
             return redirect(request.url)
-    return render_template('upload.html', form = form)
+    return render_template('others/upload.html', form = form)
 
 ######################### ERROR 404
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html", home="/home.html")
+    return render_template("others/404.html", home="/home.html")
 
 ######################### APP.RUN
 if __name__ == '__main__':
