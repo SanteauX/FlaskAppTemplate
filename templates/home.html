@@ -1,0 +1,48 @@
+{% extends 'template1.html' %}
+<!-- FOR CLARITY PURPOSE -->
+{% block Title %} Home {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block bodyTitle %} Home {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block subTitle %} I'm Hugo Joncour, welcome to my website {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block body %}
+<!--   
+    <div class="imageContainer">
+<img
+    src="{{ url_for('static', filename = 'img/Me/moi4.jpg') }}"
+    style="min-width: 200px; max-height: 400px;"
+    alt="Picture of me during the confinment"
+  />
+  </div>
+
+ -->
+<div class="bioContainer">
+  <div class="textContainer">
+    I'm a student in Applied Mathematics and Computer Science applied to
+    Economics at Université Paul-Valéry Montpellier 3. I'm currently doing my
+    final year as an exchange student at Concordia University in Montréal.
+  </div>
+  <div class="imageContainer">
+    <img
+      src="{{ url_for('static', filename = 'img/Me/moi4.jpg') }}"
+      style="min-width: 100px; max-height: 300px;"
+      alt="Concordia"
+    />
+  </div>
+</div>
+<div class="bioContainer">
+  <div class="imageContainer">
+    <img
+      src="{{ url_for('static', filename = 'img/other/john_molson_building.jpg') }}"
+      style="min-width: 100px; max-height: 300px;"
+      alt="Concordia"
+    />
+  </div>
+  <div class="textContainer">
+    I'm interested in computer science, graph theory, econometrics and machine
+    learning
+  </div>
+</div>
+
+{% endblock %}
