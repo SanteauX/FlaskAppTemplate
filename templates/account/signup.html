@@ -1,20 +1,28 @@
 {% extends 'template1.html' %}
 <!-- FOR CLARITY PURPOSE -->
-{% block Title %} Login {% endblock %}
+{% block Title %} Signup {% endblock %}
 <!-- FOR CLARITY PURPOSE -->
-{% block bodyTitle %} Login {% endblock %}
+{% block bodyTitle %} Signup {% endblock %}
 <!-- FOR CLARITY PURPOSE -->
-{% block subTitle %} Enter ID & Password {% endblock %}
+{% block subTitle %} Create an account {% endblock %}
 <!-- FOR CLARITY PURPOSE -->
 {% block body %}
 <div class="loginMainBlock">
-  <form class="loginMainBox" method="POST" action="/login">
+  <form class="loginMainBox" method="POST" action="/signup">
     <div class="loginInputBox">
       <label class="loginInputStyles">
-        ID
+        Enter the name of the label
       </label>
       <center>
-        <input type="text" class="loginInput" name="id" />
+        <input type="text" class="loginInput" name="name" />
+      </center>
+    </div>
+    <div class="loginInputBox">
+      <label class="loginInputStyles">
+        Email
+      </label>
+      <center>
+        <input type="text" class="loginInput" name="email" />
       </center>
     </div>
     <div class="loginInputBox">
@@ -22,7 +30,7 @@
         Password
       </label>
       <center>
-        <input type="text" class="loginInput" name="password" />
+        <input type="password" class="loginInput" name="password" />
       </center>
     </div>
     <button class="newProjectButton" type="submit">
