@@ -1,0 +1,33 @@
+{% extends 'template1.html' %}
+<!-- FOR CLARITY PURPOSE -->
+{% block Title %} Login {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block bodyTitle %} Login {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block subTitle %} Enter ID & Password {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block body %}
+<div class="loginMainBlock">
+  <form class="loginMainBox" method="POST" action="/login">
+    <div class="loginInputBox">
+      <label class="loginInputStyles">
+        ID
+      </label>
+      <center>
+        <input type="text" class="loginInput" name="id" />
+      </center>
+    </div>
+    <div class="loginInputBox">
+      <label class="loginInputStyles">
+        Password
+      </label>
+      <center>
+        <input type="text" class="loginInput" name="password" />
+      </center>
+    </div>
+    <button class="newProjectButton" type="submit">
+      Login
+    </button>
+  </form>
+</div>
+{% endblock %}
