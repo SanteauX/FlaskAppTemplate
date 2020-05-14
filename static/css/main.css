@@ -1,0 +1,133 @@
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e9ecef;
+  /*background-color:FFFFFF; */
+  font-family: "system-ui";
+  justify-content: center;
+  max-width: 100%;
+}
+.main {
+  display: flex;
+  height: auto;
+  margin-top: 0;
+  min-height: 100vh;
+  flex-direction: column;
+}
+/*--NAVBAR--*/
+.navbar {
+  display: flex;
+  background-color: #333;
+  overflow: hidden;
+  justify-content: space-around;
+}
+.subnav {
+  display: flex;
+  float: left;
+  text-align: center;
+  padding: 10px 12px;
+  opacity: 0.5;
+}
+.box {
+  text-decoration: none;
+  font-size: 17px;
+  padding: 7px 8px;
+  color: #f2f2f2;
+}
+.box:hover {
+  background-color: #ddd;
+  color: black;
+}
+/*--FOOTER--*/
+.footer {
+  display: flex;
+  height: 12vh;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #282c34;
+}
+.footerbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.footerContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+}
+.footerLabel {
+  color: white;
+  padding-left: 20px;
+}
+.textbox {
+  display: flex;
+  justify-content: center;
+  width: 300px;
+}
+.textDisplay {
+  color: blue;
+}
+/*--TEMPLATES--*/
+.bodyTitle {
+  display: flex;
+  width: 100%;
+  font-family: "Lato", serif;
+  font-weight: 300;
+  justify-content: center;
+  font-size: 64px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #225e93;
+}
+.subTitle {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 24px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.container {
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+/*--HOME--*/
+.bioContainer {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+  padding-left: 0;
+  padding-right: 0;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.textContainer {
+  display: flex;
+  padding: 20px;
+  margin: 5px;
+  min-width: 100px;
+  max-width: 50%;
+  margin-right: 30px;
+  background-color: #ffffff;
+}
+.imageContainer {
+  padding: 10px;
+  margin: 10px;
+  min-width: 100px;
+  max-height: 400px;
+  background-color: #ffffff;
+}
