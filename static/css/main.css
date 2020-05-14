@@ -131,3 +131,52 @@ body {
   max-height: 400px;
   background-color: #ffffff;
 }
+/*--CREATING_NEW_PROJECT--*/
+.UploadForm {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+}
+.UploadFormBox {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+.UploadSubFormBox {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-direction: column;
+}
+.UploadLabel {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+}
+.UploadItemLine {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.UploadInputDescription {
+  display: flex;
+  width: 60%;
+}
+.UploadInputTitle {
+  display: flex;
+  width: 30%;
+  height: 30px;
+}
+.UploadButton {
+  font-size: 20px;
+  padding: 15px;
+  margin: 25px;
+  width: 200px;
+  background-color: #d1d1d1c2;
+}
+.UploadButton:hover {
+  background-color: #d1d1d1;
+}

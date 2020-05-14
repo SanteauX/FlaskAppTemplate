@@ -1,0 +1,63 @@
+{% extends 'template1.html' %}
+<!-- FOR CLARITY PURPOSE -->
+{% block Title %} Upload {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block bodyTitle %} Upload {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block subTitle %} Upload {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+
+{% block body %}
+
+<form
+  class="UploadForm"
+  action="/upload"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  <div class="UploadFormBox">
+    <div class="UploadLabel">
+      <label class="projectTitle">Select image</label>
+    </div>
+    <div class="UploadSubFormBox">
+      <center>
+        <div>
+          <input
+            oninput="filesize(this);"
+            type="file"
+            class="UploadItemLine"
+            name="image"
+            id="image"
+          />
+        </div>
+      </center>
+    </div>
+    <div class="UploadSubFormBox">
+      <center>
+        <div>
+          <label class="projectTitle">Title</label>
+          <input type="text" class="UploadInputTitle" name="title" />
+        </div>
+        <div>
+          <label class="projectTitle">Description</label>
+          <textarea
+            type="text"
+            name="description"
+            class="UploadInputDescription"
+            maxlength="1000"
+            rows="20"
+            placeholder="Enter description here"
+          ></textarea>
+        </div>
+      </center>
+    </div>
+  </div>
+  <center>
+    <button class="UploadButton" type="submit">
+      Upload
+    </button>
+  </center>
+</form>
+<!-- FOR CLARITY PURPOSE -->
+
+{% endblock %}

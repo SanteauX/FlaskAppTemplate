@@ -23,7 +23,15 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+########################### CLASSES
+class Upload(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    picture = db.Column(db.String(50))
+    description = db.Column(db.String(1000))
+    date_created = db.Column(db.DateTime, default=datetime.now)
 
+########################### LOGIN MANAGER
 @login_manager.user_loader
 def load_user(email):
     f = open('database/admin.csv')
@@ -40,6 +48,35 @@ def load_user(email):
 def default():
     return render_template("home.html")
 
+@app.route('/upload', methods=["POST", "GET"])
+def upload():
+    form = Upload()
+    if request.method == "POST":
+        req = request.form
+        title = req["title"]
+        description = req["description"]
+        print(req)
+        if request.files:
+            if allowed_image_filesize(request.cookies.get("filesize")):
+                print("ERROR: File exceeded maximum size")
+                return redirect(request.url)
+            print(request.cookies)
+            image = request.files["image"]
+            if image.filename=="":
+                print("ERROR: Image must have a name")
+                return redirect(request.url)
+            if not allowed_image(image.filename):
+                print("ERROR: That image extension is not allowed")
+                return redirect(request.url)
+            else:
+                filename = secure_filename(image.filename)
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            #print(image)
+            project = Project(title=title, picture=filename, description=description)
+            db.session.add(project)
+            db.session.commit()
+            return redirect(request.url)
+    return render_template('upload.html', form = form)
 
 ######################### ERROR 404
 @app.errorhandler(404)
