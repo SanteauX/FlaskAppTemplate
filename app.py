@@ -88,32 +88,45 @@ def create_user(req):
     password = request.form["password"]
     question = request.form["question"]
     answer = request.form["answer"]
-    salt = bcrypt.gensalt()
-    password = bcrypt.hashpw(password.encode(), salt)
+
+    #salt = bcrypt.gensalt()
+    #password = bcrypt.hashpw(password.encode(), salt)
     user = User(name=name, email=email, password=password, question=question, answer=answer)
     return user
+
+def is_user_unique(user):
+    name = user.name
+    email = user.email
+    accounts = listOfUsers()
+    for i in range(0, len(accounts)):
+        if (name == accounts[i][1]) or (email == accounts[i][2]):
+            return False
+    return True
 
 ########################### ACCOUNT
 @app.route('/signup', methods=["POST", "GET"])
 def signup():
     if request.method == "POST":
         user = create_user(request.form)
-        db.session.add(user)
-        db.session.commit()
-        return redirect(request.url)
+        if is_user_unique(user):
+            db.session.add(user)
+            db.session.commit()
+            return redirect(request.url)
+        else:
+            return render_template("others/formResponse.html", message="Username or email already used")
     return render_template("account/signup.html")
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
+    if request.method == 'POST':
         email = form.email.data
+        password = form.check.data
         if email_exists(email):
             user = load_user(email)
-            session['name'] = user.name
-            if bcrypt.checkpw(form.password.data.encode(), user.password.encode()):
-                login_user(user)
-                return redirect('account', name=user.name)
+            print("fond user, it worked")
+            #session['name'] = user.name
+            return redirect('home')
     return render_template('account/login.html')
 
 ########################### ROUTES

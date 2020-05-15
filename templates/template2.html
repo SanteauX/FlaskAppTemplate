@@ -22,13 +22,21 @@
         <div class="subnav">
           <a class="box" href="upload">Upload</a>
         </div>
+        {% if current_user.is_authenticated %}
         <div class="subnav">
-          <a class="box" href="projects">Projects</a>
+          <a class="box" href="signup">{{ current_user.name }} Account</a>
+        </div>
+        {% else %}
+        <div class="subnav">
+          <a class="box" href="signup">Signup</a>
         </div>
         <div class="subnav">
-          <a class="box" href="contact">Contact</a>
+          <a class="box" href="login">Login</a>
         </div>
+        {% endif %}
+
       </nav>
+
       <div class="bodyTitle">
         {% block bodyTitle %} {% endblock %}
       </div>
