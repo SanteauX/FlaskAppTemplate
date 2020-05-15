@@ -29,20 +29,43 @@ class User(db.Model):
     name = db.Column(db.String(50))
     email = db.Column(db.String(50))
     password = db.Column(db.String(1000))
-    quesiton = db.Column(db.String(1000))
+    question = db.Column(db.String(1000))
     answer = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime, default=datetime.now)
+
+########################### FUNCTIONS
+def listOfUsers():
+    user_lines = User.query.all()
+    lines = []
+    for i in range(0, len(user_lines)):
+        line = [user_lines[i].id + 1000000000, user_lines[i].name,user_lines[i].email, user_lines[i].password, user_lines[i].question,user_lines[i].answer,user_lines[i].date_created]
+        lines.append(line)
+    return lines
 
 ########################### LOGIN MANAGER
 @login_manager.user_loader
 def load_user(email):
-    f = open('database/admin.csv')
-    lines = f.readlines()
-    line = lines[1].split(",")
-    if line[0] == email:
-        return True
-    else:
-        return False
+    accounts = listOfUsers()
+    for i in range(0, len(listOfUsers)):
+        if email == listOfUsers[i][2]:
+            return User(listOfUsers[i][0], listOfUsers[i][1], listOfUsers[i][2], listOfUsers[i][3], listOfUsers[i][4], listOfUsers[i][5], listOfUsers[i][6])
+
+def email_exists(email):
+    accounts = listOfUsers()
+    for i in range(0, len(accounts)):
+        print(accounts[i])
+        if email == accounts[i][2]:
+            return True
+    return False
+
+def check_password(email, password):
+    accounts = listOfUsers()
+    for i in range(0, len(listOfUsers)):
+        if email == listOfUsers[i][2]:
+            if password == listOfUsers[i][3]:
+                return True
+            return False
+    return False
 
 ########################### ACCOUNT
 @app.route('/signup', methods=["POST", "GET"])
@@ -53,10 +76,10 @@ def signup():
         email = req.get("email")
         password = request.form["password"]
         question = request.form["question"]
-        answer = request.form["ansqer"]
+        answer = request.form["answer"]
         salt = bcrypt.gensalt()
-        password = bcrypt.hashpw(form.password.data.encode(), salt)
-        user = User(name=name, email=email, description=description)
+        password = bcrypt.hashpw(password.encode(), salt)
+        user = User(name=name, email=email, password=password, question=question, answer=answer)
         db.session.add(user)
         db.session.commit()
         return redirect(request.url)
@@ -64,7 +87,19 @@ def signup():
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
-    return render_template("account/login.html")
+    if request.method == "POST":
+        req = request.form
+        email = req.get("email")
+        password = req["password"]
+        salt = bcrypt.gensalt()
+        password = bcrypt.hashpw(password.encode(), salt)
+        accounts = listOfUsers()
+        if email_exists(email):
+            if check_password(email, password):
+                user = load_user(email)
+                login_user(user)
+                return redirect('account', name=user.name)
+    return render_template('account/login.html')
 
 ########################### ROUTES
 @app.route('/')

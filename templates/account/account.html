@@ -1,0 +1,48 @@
+{% extends 'template1.html' %}
+<!-- FOR CLARITY PURPOSE -->
+{% block Title %} Account {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block bodyTitle %} Account {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block subTitle %} {{ name }}'s account {% endblock %}
+<!-- FOR CLARITY PURPOSE -->
+{% block body %}
+
+<div class="bioContainer">
+  <div class="textContainer">
+    This is a boiler plate, and next to this text is a placeholder Lorem ipsum
+    dolor sit, amet consectetur adipisicing elit. Minus cum vitae architecto sit
+    ducimus! Dignissimos eum nulla magni alias quia. Architecto tenetur
+    inventore facilis ullam sunt ab itaque nobis id. Lorem ipsum dolor sit amet
+    consectetur adipisicing elit. Doloribus laboriosam, in saepe eos soluta
+    consequatur nihil perferendis, totam voluptatibus nesciunt sapiente corrupti
+    tempore omnis molestiae atque impedit, minus blanditiis voluptas?
+  </div>
+  <div class="imageContainer">
+    <img
+      src="{{ url_for('static', filename = 'img/placeholder/placeholder.png') }}"
+      style="min-width: 100px; max-height: 300px;"
+      alt="placeholder"
+    />
+  </div>
+</div>
+<div class="bioContainer">
+  <div class="imageContainer">
+    <img
+      src="{{ url_for('static', filename = 'img/placeholder/placeholder.png') }}"
+      style="min-width: 100px; max-height: 300px;"
+      alt="placeholder"
+    />
+  </div>
+  <div class="textContainer">
+    This is a boiler plate, and next to this text is a placeholder Lorem ipsum
+    dolor sit, amet consectetur adipisicing elit. Minus cum vitae architecto sit
+    ducimus! Dignissimos eum nulla magni alias quia. Architecto tenetur
+    inventore facilis ullam sunt ab itaque nobis id. Lorem ipsum dolor sit amet
+    consectetur adipisicing elit. Doloribus laboriosam, in saepe eos soluta
+    consequatur nihil perferendis, totam voluptatibus nesciunt sapiente corrupti
+    tempore omnis molestiae atque impedit, minus blanditiis voluptas?
+  </div>
+</div>
+
+{% endblock %}
