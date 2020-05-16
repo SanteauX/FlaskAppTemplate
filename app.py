@@ -33,7 +33,9 @@ class User(db.Model):
     answer = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime, default=datetime.now)
 
-    def __init__(self, name, email, password, question, answer):
+class UserM(UserMixin):
+    def __init__(self, id, name, email, password, question, answer):
+        self.id = id
         self.name = name
         self.email = email
         self.password = password
@@ -67,7 +69,7 @@ def load_user(email):
     accounts = listOfUsers()
     for i in range(0, len(accounts)):
         if email == accounts[i][2]:
-            user = User(accounts[i][1], accounts[i][2], accounts[i][3], accounts[i][4], accounts[i][5])
+            user = UserM(accounts[i][0], accounts[i][1], accounts[i][2], accounts[i][3], accounts[i][4], accounts[i][5])
             return user
 
 def email_exists(email):
@@ -98,7 +100,7 @@ def create_user(req):
     answer = request.form["answer"]
     #salt = bcrypt.gensalt()
     #password = bcrypt.hashpw(password.encode(), salt)
-    user = User(name=name, email=email, password=password, question=question, answer=answer)
+    user = UserM(name=name, email=email, password=password, question=question, answer=answer)
     return user
 
 def is_user_unique(user):
@@ -132,7 +134,8 @@ def login():
         if email_exists(email):
             user = load_user(email)
             print("fond user, it worked")
-            #session['name'] = user.name
+            session['name'] = user.name
+            login_user(user)
             return render_template('/account/account.html', name=user.name )
     return render_template('account/login.html')
 
