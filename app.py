@@ -33,6 +33,14 @@ class User(db.Model):
     answer = db.Column(db.String(1000))
     date_created = db.Column(db.DateTime, default=datetime.now)
 
+    def __init__(self, name, email, password, question, answer):
+        self.name = name
+        self.email = email
+        self.password = password
+        self.question = question
+        self.answer = answer
+
+
 class Upload(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
@@ -88,7 +96,6 @@ def create_user(req):
     password = request.form["password"]
     question = request.form["question"]
     answer = request.form["answer"]
-
     #salt = bcrypt.gensalt()
     #password = bcrypt.hashpw(password.encode(), salt)
     user = User(name=name, email=email, password=password, question=question, answer=answer)
@@ -121,13 +128,17 @@ def login():
     form = LoginForm()
     if request.method == 'POST':
         email = form.email.data
-        password = form.check.data
+        password = form.password.data
         if email_exists(email):
             user = load_user(email)
             print("fond user, it worked")
             #session['name'] = user.name
-            return redirect('home')
+            return render_template('/account/account.html', name=user.name )
     return render_template('account/login.html')
+
+@login_required
+def account():
+    return render_template("account/account.html")
 
 ########################### ROUTES
 @app.route('/')
