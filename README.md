@@ -8,4 +8,4 @@ Includes:
 Needs to be added:
 
 - bcrypt for password storage
--
+- fix newsletter request on template
