@@ -24,14 +24,17 @@
         </div>
         {% if current_user.is_authenticated %}
         <div class="subnav">
-          <a class="box" href="signup">{{ current_user.name }} Account</a>
+          <a class="box" href="account">{{ current_user.name }} Account</a>
+        </div>
+        <div class="subnav">
+          <a class="box" href="logout">Logout</a>
         </div>
         {% else %}
         <div class="subnav">
-          <a class="box" href="signup">Signup</a>
+          <a class="box" href="login">Login</a>
         </div>
         <div class="subnav">
-          <a class="box" href="login">Login</a>
+          <a class="box" href="signup">Signup</a>
         </div>
         {% endif %}
 

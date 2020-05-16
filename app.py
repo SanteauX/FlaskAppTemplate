@@ -23,6 +23,27 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+########################### IMAGE UPLOAD
+app.config["IMAGE_UPLOADS"]="static/img/uploads"
+app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PNG", "JPG", "JPEG", "GIF"]
+app.config["MAX_IMAGE_FILESIZE"] = 12*1024*1024
+
+def allowed_image(filename):
+    if not "." in filename:
+        return False
+    ext = filename.rsplit(".", 1)[1]
+    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+        return True
+    else:
+        return False
+
+def allowed_image_filesize(filesize):
+    if int(filesize) >= app.config["MAX_IMAGE_FILESIZE"]:
+        return True
+    else:
+        return False
+
+
 ########################### CLASSES
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -180,8 +201,8 @@ def upload():
                 filename = secure_filename(image.filename)
             image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
             #print(image)
-            project = Project(title=title, picture=filename, description=description)
-            db.session.add(project)
+            upload = Upload(title=title, picture=filename, description=description)
+            db.session.add(upload)
             db.session.commit()
             return redirect(request.url)
     return render_template('others/upload.html', form = form)
