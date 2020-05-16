@@ -136,9 +136,17 @@ def login():
             return render_template('/account/account.html', name=user.name )
     return render_template('account/login.html')
 
+@app.route('/account')
 @login_required
 def account():
     return render_template("account/account.html")
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    # flash(str(session))
+    return redirect('/')
 
 ########################### ROUTES
 @app.route('/')
