@@ -8,4 +8,5 @@ Includes:
 Needs to be added:
 
 - bcrypt for password storage
+- Add multi-line form & handling
 - fix newsletter request on template
